@@ -1,0 +1,51 @@
+package MQTT.SpringApp;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+
+import java.util.UUID;
+
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
+@SpringBootApplication
+public class SpringAppApplication {
+
+	public static MqttAsyncClient myClient;
+
+	@Autowired
+	private MyCallback myCallback;
+	
+	@Autowired
+	private StoreService stores;
+
+	public static void main(String[] args) throws MqttException {
+
+		SpringApplication.run(SpringAppApplication.class, args);
+
+	}
+	
+
+	@EventListener(ApplicationReadyEvent.class)
+	public void doSomethingAfterStartup() throws MqttException {
+		stores.initialAdd();
+		
+		myClient = new MqttAsyncClient("tcp://192.168.0.223:1883", UUID.randomUUID().toString()); // A client is created
+
+		myClient.setCallback(myCallback); // The callback is assigned to the client
+		MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+		mqttConnectOptions.setAutomaticReconnect(true);
+		mqttConnectOptions.setCleanSession(false);
+
+		IMqttToken token = myClient.connect(mqttConnectOptions);
+		token.waitForCompletion();
+
+		myClient.subscribe("sensors/+/+", 2); // The customer subscribes to the requested topics*/
+	}
+
+}
