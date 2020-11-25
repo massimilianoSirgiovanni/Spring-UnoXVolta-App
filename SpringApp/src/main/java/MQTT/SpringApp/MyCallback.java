@@ -12,11 +12,7 @@ import org.springframework.stereotype.Service;
 public class MyCallback implements MqttCallback {
 
 	@Autowired
-	private MqttController controller;
-
-	// private LinkedList<MessageStored> storeMessage = new
-	// LinkedList<MessageStored>(); // List to keep track of received
-	// messages
+	private MqttService controller;
 
 	public MyCallback() {
 
@@ -77,6 +73,7 @@ public class MyCallback implements MqttCallback {
 	}
 
 	public String elaborateStore(String topic) {
+		// The name of the store to send the message to is extracted from the topic
 
 		String finalStore = "";
 
@@ -99,7 +96,5 @@ public class MyCallback implements MqttCallback {
 		return finalStore;
 
 	}
-
-///////////////////GETTERS AND SETTERS//////////////////////////////////////
 
 }

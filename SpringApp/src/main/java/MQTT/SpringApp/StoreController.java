@@ -15,7 +15,7 @@ public class StoreController {
 	private StoreService stores;
 
 	@Autowired
-	private MqttController messages;
+	private MqttService messages;
 
 	@RequestMapping("/stores")
 	public List<Store> getStores() {

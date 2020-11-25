@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MqttController {
+public class MqttService {
+
+	// This class links the mqtt client with the items in the repository
 
 	@Autowired
 	private StoreService stores;

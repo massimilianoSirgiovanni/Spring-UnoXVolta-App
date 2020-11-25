@@ -13,8 +13,6 @@ public class StoreService {
 	@Autowired
 	private StoreRepository storeRepository;
 
-	private boolean init = true;
-
 	public List<Store> getAllStores() {
 		List<Store> stores = new ArrayList<>();
 		storeRepository.findAll().forEach(t -> stores.add(t));
@@ -49,21 +47,19 @@ public class StoreService {
 		Store store = new Store(name);
 		addStore(store);
 	}
-	
-	public void updateMaxValue (String name, int max) {
+
+	public void updateMaxValue(String name, int max) {
 		Store store = getStore(name);
 		store.setNumberMax(max);
 		addStore(store);
 	}
 
-	public void initialAdd() {
-		if (init) {
-			addStore(new Store("Firenze", 50));
-			addStore(new Store("Londra", 20));
-			addStore(new Store("Pisa", 30));
-		}
+	////////////////// TMP//////////////////////////
 
-		init = false;
+	public void initialAdd() {
+		addStore(new Store("Firenze", 50));
+		addStore(new Store("Londra", 20));
+		addStore(new Store("Pisa", 30));
 
 	}
 

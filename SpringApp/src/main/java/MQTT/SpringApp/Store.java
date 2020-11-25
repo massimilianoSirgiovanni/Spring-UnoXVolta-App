@@ -7,9 +7,11 @@ import javax.persistence.Id;
 public class Store {
 
 	@Id
-	public String name;
+	public String name; // Name of the store
 	private int count; // Number of people currently in the room
 	private int numberMax = 0; // Maximum number of people allowed
+
+	//////////////// Constructors/////////////////////////
 
 	public Store() {
 
@@ -24,6 +26,8 @@ public class Store {
 		this.name = name;
 		this.setNumberMax(numberMax);
 	}
+
+	//////////////////// Getters and Setters/////////////////
 
 	public int getCount() {
 		return count;
@@ -41,7 +45,10 @@ public class Store {
 		return name;
 	}
 
+	/////////////////////////////////////////////////////////
+
 	public void addCount(int number) {
+		// Calculate the change in the number of people in the shop
 		count = count + number;
 		if (count < 0) {
 			count = 0;
