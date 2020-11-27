@@ -1,8 +1,6 @@
 package MQTT.SpringApp;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -12,13 +10,12 @@ public class Message {
 	// a single object
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	String topic;
-	String message;
-	
+	private String id = CreateID.createID();
+	private String topic;
+	private String message;
+
 	public Message() {
-		
+
 	}
 
 	public Message(String topic, String message) {
@@ -45,6 +42,14 @@ public class Message {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/////////////////////////////////////////////////

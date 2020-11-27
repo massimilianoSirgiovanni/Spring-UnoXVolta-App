@@ -57,9 +57,9 @@ public class StoreService {
 	////////////////// TMP//////////////////////////
 
 	public void initialAdd() {
-		addStore(new Store("Firenze", 50));
-		addStore(new Store("Londra", 20));
-		addStore(new Store("Pisa", 30));
+		addStore(new Store("Seven", 50));
+		addStore(new Store("American", 20));
+		addStore(new Store("Club", 30));
 
 	}
 
