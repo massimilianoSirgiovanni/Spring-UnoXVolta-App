@@ -19,7 +19,7 @@ public class SpringAppApplication {
 	public static MqttAsyncClient myClient;
 
 	@Autowired
-	private MyCallback myCallback;
+	private Callback myCallback;
 
 	@Autowired
 	private StoreService stores;
@@ -31,7 +31,7 @@ public class SpringAppApplication {
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public void doSomethingAfterStartup() throws MqttException {
+	public void startMqttClient() throws MqttException {
 		stores.initialAdd(); // Temporary data initialization, to facilitate testing
 
 		// Operations for connecting the client to the mqtt broker

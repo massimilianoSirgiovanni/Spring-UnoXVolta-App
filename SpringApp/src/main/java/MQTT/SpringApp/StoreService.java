@@ -14,18 +14,20 @@ public class StoreService {
 	private StoreRepository storeRepository;
 
 	public List<Store> getAllStores() {
+		// Returns all saved stores
 		List<Store> stores = new ArrayList<>();
 		storeRepository.findAll().forEach(t -> stores.add(t));
 		return stores;
 	}
 
 	public Store getStore(String name) {
-
+		// Returns the store named "name"
 		return storeRepository.findById(name).get();
 
 	}
 
 	public void addCount(String name, int number) {
+		// Update the number of customers in the selected store
 		Store thisStore = this.getStore(name);
 		thisStore.addCount(number);
 		storeRepository.save(thisStore);
@@ -44,6 +46,7 @@ public class StoreService {
 	}
 
 	public void createAndAdd(String name) {
+		// Create a store and save it directly
 		Store store = new Store(name);
 		addStore(store);
 	}

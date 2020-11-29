@@ -41,7 +41,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(("/addstore/{name}"))
-	public String addTopic(@PathVariable String name) {
+	public String addStore(@PathVariable String name) {
 		stores.createAndAdd(name);
 		return "The store " + name + " has been added";
 	}

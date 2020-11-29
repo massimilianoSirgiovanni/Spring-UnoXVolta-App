@@ -17,11 +17,11 @@ public class MqttService {
 	@Autowired
 	private MessageRepository messages;
 
-	public void enter(String storeName, String message) {
+	public void messageEnterStore(String storeName, String message) {
 		stores.addCount(storeName, Integer.parseInt(message));
 	}
 
-	public void exit(String storeName, String message) {
+	public void messageExitStore(String storeName, String message) {
 
 		stores.addCount(storeName, -Integer.parseInt(message));
 	}

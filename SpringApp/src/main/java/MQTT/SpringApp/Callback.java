@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 //import MQTT.UnoXVoltaApp.MessageStored;
 
 @Service
-public class MyCallback implements MqttCallback {
+public class Callback implements MqttCallback {
 
 	@Autowired
 	private MqttService controller;
 
-	public MyCallback() {
+	public Callback() {
 
 	}
 
@@ -44,10 +44,10 @@ public class MyCallback implements MqttCallback {
 		String storeName = elaborateStore(topic);
 		topic = elaborateTopic(topic);
 		if (topic.compareTo("enter") == 0) {
-			controller.enter(storeName, message.toString());
+			controller.messageEnterStore(storeName, message.toString());
 
 		} else if (topic.compareTo("exit") == 0) {
-			controller.exit(storeName, message.toString());
+			controller.messageExitStore(storeName, message.toString());
 
 		}
 
