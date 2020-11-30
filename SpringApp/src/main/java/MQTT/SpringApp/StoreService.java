@@ -57,13 +57,4 @@ public class StoreService {
 		addStore(store);
 	}
 
-	////////////////// TMP//////////////////////////
-
-	public void initialAdd() {
-		addStore(new Store("Seven", 50));
-		addStore(new Store("American", 20));
-		addStore(new Store("Club", 30));
-
-	}
-
 }

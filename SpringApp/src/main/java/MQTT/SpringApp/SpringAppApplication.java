@@ -21,8 +21,6 @@ public class SpringAppApplication {
 	@Autowired
 	private Callback myCallback;
 
-	@Autowired
-	private StoreService stores;
 
 	public static void main(String[] args) throws MqttException {
 
@@ -32,7 +30,6 @@ public class SpringAppApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void startMqttClient() throws MqttException {
-		stores.initialAdd(); // Temporary data initialization, to facilitate testing
 
 		// Operations for connecting the client to the mqtt broker
 

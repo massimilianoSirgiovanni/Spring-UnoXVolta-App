@@ -38,5 +38,9 @@ public class MqttService {
 		messages.findAll().forEach(t -> toStoreMessages.add(t));
 		return toStoreMessages;
 	}
+	
+	public void cleanMessageDatabase() {
+		messages.deleteAll();
+	}
 
 }
