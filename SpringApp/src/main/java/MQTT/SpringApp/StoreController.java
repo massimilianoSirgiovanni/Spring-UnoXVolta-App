@@ -51,7 +51,7 @@ public class StoreController {
 		stores.updateMaxValue(name, max);
 		return "The maximum number of people allowed in the store " + name + " has been changed to " + max;
 	}
-	
+
 	@RequestMapping(("/removestore/{name}"))
 	public String removeStore(@PathVariable String name) {
 		stores.removeStore(stores.getStore(name));
@@ -62,10 +62,11 @@ public class StoreController {
 	public List<Message> getMessage() {
 		return messages.getAllMessage();
 	}
-	
+
 	@RequestMapping("/cleanmessages")
 	public String removeAllMessages() {
-		messages.cleanMessageDatabase();;
+		messages.cleanMessageDatabase();
+		CreateID.resetID();
 		return "All the messages in the Database has been deleted";
 	}
 
