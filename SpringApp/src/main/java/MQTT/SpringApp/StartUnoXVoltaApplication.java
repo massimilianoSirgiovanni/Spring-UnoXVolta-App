@@ -14,17 +14,16 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 @SpringBootApplication
-public class SpringAppApplication {
+public class StartUnoXVoltaApplication {
 
 	public static MqttAsyncClient myClient;
 
 	@Autowired
 	private Callback myCallback;
 
-
 	public static void main(String[] args) throws MqttException {
 
-		SpringApplication.run(SpringAppApplication.class, args); // The application starts
+		SpringApplication.run(StartUnoXVoltaApplication.class, args); // The application starts
 
 	}
 

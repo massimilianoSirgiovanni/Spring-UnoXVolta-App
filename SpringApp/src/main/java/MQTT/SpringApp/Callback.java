@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class Callback implements MqttCallback {
 
 	@Autowired
-	private MqttService controller;
+	private MqttService mqtt;
 
 	public Callback() {
 
@@ -35,7 +35,7 @@ public class Callback implements MqttCallback {
 
 		String storeName = elaborateStore(topic);
 		elaborateMessage(topic, message, storeName); // The content of the message is processed and used
-		controller.storeMessages(topic, message.toString(), storeName);
+		mqtt.storeMessages(topic, message.toString(), storeName);
 	}
 
 	public void elaborateMessage(String topic, MqttMessage message, String storeName) {
@@ -44,10 +44,10 @@ public class Callback implements MqttCallback {
 
 		topic = elaborateTopic(topic);
 		if (topic.compareTo("enter") == 0) {
-			controller.messageEnterStore(storeName, message.toString());
+			mqtt.messageEnterStore(storeName, message.toString());
 
 		} else if (topic.compareTo("exit") == 0) {
-			controller.messageExitStore(storeName, message.toString());
+			mqtt.messageExitStore(storeName, message.toString());
 
 		}
 
