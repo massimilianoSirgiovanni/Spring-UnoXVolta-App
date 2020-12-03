@@ -1,7 +1,6 @@
 package MQTT.SpringApp;
 
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +19,30 @@ public class StoreService {
 		return stores;
 	}
 
-	public Store getStore(String name) {
+	public List<Store> getStoresByName(String name) {
 		// Returns the store named "name"
-		return storeRepository.findById(name).get();
+		List<Store> stores = new ArrayList<>();
+		storeRepository.findAllByName(name).forEach(t -> stores.add(t));
+		return stores;
 
+	}
+
+	public Store getStoreByID(long id) {
+		// Returns the store with the id "id"
+		return storeRepository.findById(id).get();
 	}
 
 	public void addCount(String name, int number) {
 		// Update the number of customers in the selected store
-		Store thisStore = this.getStore(name);
-		thisStore.addCount(number);
-		storeRepository.save(thisStore);
+		List<Store> thisStore = this.getStoresByName(name);
+		thisStore.forEach(t -> t.addCount(number));
+		addStore(thisStore);
+	}
+
+	public void addStore(List<Store> store) {
+
+		store.forEach(t -> storeRepository.save(t));
+
 	}
 
 	public void addStore(Store store) {
@@ -45,6 +57,12 @@ public class StoreService {
 
 	}
 
+	public void removeStore(List<Store> store) {
+
+		store.forEach(t -> storeRepository.delete(t));
+
+	}
+
 	public void createAndAdd(String name) {
 		// Create a store and save it directly
 		Store store = new Store(name);
@@ -52,7 +70,13 @@ public class StoreService {
 	}
 
 	public void updateMaxValue(String name, int max) {
-		Store store = getStore(name);
+		List<Store> store = getStoresByName(name);
+		store.forEach(t -> t.setNumberMax(max));
+		addStore(store);
+	}
+
+	public void updateMaxValueByID(long id, int max) {
+		Store store = storeRepository.findById(id).get();
 		store.setNumberMax(max);
 		addStore(store);
 	}

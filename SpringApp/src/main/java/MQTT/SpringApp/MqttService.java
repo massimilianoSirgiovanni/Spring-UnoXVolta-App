@@ -26,21 +26,27 @@ public class MqttService {
 		stores.addCount(storeName, -Integer.parseInt(message));
 	}
 
-	public void storeMessages(String topic, String message) {
+	public void storeMessages(String topic, String message, String store) {
 
-		Message toStore = new Message(topic, message);
+		Message toStore = new Message(topic, message, store);
 		messages.save(toStore);
 
 	}
 
-	public List<Message> getAllMessage() {
+	public List<Message> getAllMessages() {
 		List<Message> toStoreMessages = new ArrayList<>();
 		messages.findAll().forEach(t -> toStoreMessages.add(t));
 		return toStoreMessages;
 	}
-	
+
 	public void cleanMessageDatabase() {
 		messages.deleteAll();
+	}
+
+	public List<Message> getAllMessagesByStore(String store) {
+		List<Message> toStoreMessages = new ArrayList<>();
+		messages.findAllByStore(store).forEach(t -> toStoreMessages.add(t));
+		return toStoreMessages;
 	}
 
 }

@@ -33,15 +33,15 @@ public class Callback implements MqttCallback {
 
 	public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-		elaborateMessage(topic, message); // The content of the message is processed and used
-		controller.storeMessages(topic, message.toString());
+		String storeName = elaborateStore(topic);
+		elaborateMessage(topic, message, storeName); // The content of the message is processed and used
+		controller.storeMessages(topic, message.toString(), storeName);
 	}
 
-	public void elaborateMessage(String topic, MqttMessage message) {
+	public void elaborateMessage(String topic, MqttMessage message, String storeName) {
 
 		// The content of the message is processed and used
 
-		String storeName = elaborateStore(topic);
 		topic = elaborateTopic(topic);
 		if (topic.compareTo("enter") == 0) {
 			controller.messageEnterStore(storeName, message.toString());

@@ -1,13 +1,17 @@
 package MQTT.SpringApp;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Store {
 
 	@Id
-	public String name; // Name of the store
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String name; // Name of the store
 	private int count; // Number of people currently in the room
 	private int numberMax = 0; // Maximum number of people allowed
 
@@ -43,6 +47,10 @@ public class Store {
 
 	public String getName() {
 		return name;
+	}
+
+	public long getID() {
+		return id;
 	}
 
 	/////////////////////////////////////////////////////////

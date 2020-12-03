@@ -1,5 +1,7 @@
 package MQTT.SpringApp;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,16 +15,22 @@ public class Message {
 	private String id = CreateID.createID();
 	private String topic;
 	private String message;
+	private String store;
+	Date creationDate;
 
 	public Message() {
 
 	}
 
-	public Message(String topic, String message) {
+	public Message(String topic, String message, String store) {
 
 		this.topic = topic;
 
 		this.message = message;
+
+		this.store = store;
+
+		this.creationDate = new Date(); // sets to the current date/time
 
 	}
 
@@ -32,26 +40,20 @@ public class Message {
 		return topic;
 	}
 
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
-
 	public String getMessage() {
 		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getStore() {
+		return store;
 	}
 
-	/////////////////////////////////////////////////
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
 }
